@@ -1,0 +1,96 @@
+---
+description: Component development standards
+globs: src/components/**/*.tsx
+alwaysApply: true
+---
+
+# Component Development Standards
+
+## Component Template
+```tsx
+'use client';
+
+import { type FC } from 'react';
+import { motion } from 'framer-motion';
+
+// Types
+interface ComponentNameProps {
+  /** Description of prop */
+  propName: string;
+  /** Optional prop with default */
+  optionalProp?: boolean;
+  /** Event handler */
+  onAction?: () => void;
+}
+
+// Constants
+const ANIMATION_DURATION = 0.3;
+
+/**
+ * ComponentName - Brief description of what it does
+ * 
+ * @example
+ * <ComponentName propName="value" onAction={handleAction} />
+ */
+export const ComponentName: FC<ComponentNameProps> = ({
+  propName,
+  optionalProp = false,
+  onAction,
+}) => {
+  // Hooks first
+  
+  // Derived state
+  
+  // Event handlers
+  const handleClick = () => {
+    onAction?.();
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="..."
+    >
+      {/* Component content */}
+    </motion.div>
+  );
+};
+```
+
+## Game-Specific Components
+
+### QuestionCard
+- Display question text prominently (large, bold)
+- Show question number and total
+- Category badge with icon
+- Timer indicator if timed
+
+### AnswerButton
+- Large touch target (min 56px height)
+- Clear selected/unselected states
+- Correct/incorrect feedback animations
+- Disabled state after answering
+
+### ScoreDisplay
+- Animated number counter
+- Star/trophy icons
+- Progress toward next level
+
+### ProgressBar
+- Visual progress (not just numbers)
+- Current question indicator
+- Celebratory animation on completion
+
+### Timer
+- Circular or linear progress
+- Color changes as time runs out
+- Pulse animation in last seconds
+
+## Accessibility Checklist
+- [ ] Semantic HTML elements
+- [ ] ARIA labels where needed
+- [ ] Keyboard navigation works
+- [ ] Focus indicators visible
+- [ ] Color contrast 4.5:1+
+- [ ] Reduced motion support

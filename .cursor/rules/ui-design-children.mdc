@@ -1,0 +1,91 @@
+---
+description: UI/UX design guidelines for child-friendly, colorful interface
+globs: **/*.{tsx,css,scss}
+alwaysApply: true
+---
+
+# Child-Friendly UI/UX Design Guidelines
+
+## Color Palette - Vibrant & Playful
+
+```css
+:root {
+  /* Primary Colors - Bright & Playful */
+  --color-primary: #FF6B6B;        /* Coral Red - Energy */
+  --color-secondary: #4ECDC4;      /* Turquoise - Fun */
+  --color-accent: #FFE66D;         /* Sunny Yellow - Joy */
+  
+  /* Supporting Colors */
+  --color-purple: #A855F7;         /* Purple - Magic */
+  --color-pink: #F472B6;           /* Pink - Playful */
+  --color-blue: #3B82F6;           /* Blue - Trust */
+  --color-green: #22C55E;          /* Green - Success */
+  --color-orange: #FB923C;         /* Orange - Excitement */
+  
+  /* Feedback Colors */
+  --color-correct: #22C55E;        /* Green for correct */
+  --color-incorrect: #EF4444;      /* Red for wrong */
+  --color-highlight: #FBBF24;      /* Gold for achievements */
+  
+  /* Backgrounds - Soft & Inviting */
+  --bg-primary: #FFF5F5;           /* Soft pink-white */
+  --bg-secondary: #F0FDFA;         /* Soft turquoise-white */
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+```
+
+## Design Principles for Children
+
+### 1. Big, Tappable Elements
+- Buttons: minimum 48px height
+- Touch targets: generous padding (16px+)
+- Spacing between interactive elements
+
+### 2. Clear Visual Hierarchy
+- Important elements are obvious
+- Use size, color, and position to guide attention
+- One primary action per screen
+
+### 3. Immediate Feedback
+- Animations on every interaction
+- Color changes on hover/press
+- Sound effects for actions (optional)
+
+### 4. Encouraging Language
+- ✅ "!כל הכבוד" "!נסה שוב" "?בוא ננסה שאלה אחרת"
+- ❌ "טעית" "תשובה שגויה" "נכשלת"
+
+### 5. Visual Cues
+- Icons alongside text always
+- Progress indicators visible
+- Clear navigation breadcrumbs
+
+### 6. Playful Animations
+- Bouncy transitions
+- Celebratory effects (confetti, stars)
+- Character reactions
+
+## Component Design
+
+### Buttons
+```tsx
+// Rounded, shadowed, animated
+className="rounded-2xl shadow-lg px-8 py-4 
+           hover:scale-105 active:scale-95 
+           transition-transform duration-200"
+```
+
+### Cards
+```tsx
+// Generous padding, soft shadows, rounded
+className="p-6 rounded-3xl shadow-xl 
+           bg-gradient-to-br from-white to-gray-50
+           border-4 border-transparent
+           hover:border-primary transition-colors"
+```
+
+### Feedback States
+- ✅ **Correct**: Green glow, confetti, "!מעולה"
+- ❌ **Wrong**: Gentle red, encouraging message, "!נסה שוב"
+- ⏰ **Timer**: Visible countdown, urgency colors
+- 🏆 **Complete**: Celebration screen, stars, achievements

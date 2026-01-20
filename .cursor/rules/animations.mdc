@@ -1,0 +1,124 @@
+---
+description: Animation guidelines using Framer Motion
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# Animation Guidelines
+
+## Use Framer Motion for Animations
+
+### Standard Transitions
+```typescript
+// Smooth spring for UI elements
+const springTransition = { 
+  type: "spring", 
+  stiffness: 300, 
+  damping: 20 
+};
+
+// Bouncy for playful elements
+const bounceTransition = { 
+  type: "spring", 
+  stiffness: 500, 
+  damping: 15 
+};
+
+// Quick for feedback
+const quickTransition = { 
+  duration: 0.2 
+};
+```
+
+### Common Animation Patterns
+
+```tsx
+// Fade in
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.3 }}
+/>
+
+// Scale up entrance
+<motion.div
+  initial={{ scale: 0.8, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={springTransition}
+/>
+
+// Slide from right (RTL-aware)
+<motion.div
+  initial={{ x: -50, opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+/>
+
+// Button press effect
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+/>
+
+// Bounce loop (for attention)
+<motion.div
+  animate={{ y: [0, -10, 0] }}
+  transition={{ repeat: Infinity, duration: 0.6 }}
+/>
+
+// Shake for wrong answer
+<motion.div
+  animate={{ x: [0, -10, 10, -10, 10, 0] }}
+  transition={{ duration: 0.4 }}
+/>
+
+// Confetti burst for correct
+<motion.div
+  initial={{ scale: 0, rotate: 0 }}
+  animate={{ scale: 1, rotate: 360 }}
+  transition={{ type: "spring", stiffness: 200 }}
+/>
+```
+
+### Page Transitions
+```tsx
+// Wrap pages with AnimatePresence
+<AnimatePresence mode="wait">
+  <motion.div
+    key={pageKey}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.3 }}
+  >
+    {children}
+  </motion.div>
+</AnimatePresence>
+```
+
+### Staggered Children
+```tsx
+// Container with stagger
+<motion.ul
+  variants={{
+    visible: { transition: { staggerChildren: 0.1 } }
+  }}
+  initial="hidden"
+  animate="visible"
+>
+  {items.map(item => (
+    <motion.li
+      key={item.id}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+      }}
+    />
+  ))}
+</motion.ul>
+```
+
+## Performance Tips
+- Use `transform` and `opacity` for smooth 60fps
+- Avoid animating `width`, `height`, `top`, `left`
+- Use `layoutId` for shared element transitions
+- Add `will-change` for complex animations

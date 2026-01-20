@@ -1,0 +1,82 @@
+---
+description: Code quality standards and naming conventions
+globs: **/*.{ts,tsx}
+alwaysApply: true
+---
+
+# Code Quality Standards
+
+## Naming Conventions
+
+### Variables & Functions
+- **Variables**: camelCase with clear intent
+  - ✅ `playerScore`, `currentQuestionIndex`, `isAnswerCorrect`
+  - ❌ `score`, `idx`, `correct`
+
+- **Functions**: verb + noun pattern
+  - ✅ `calculateScore()`, `fetchQuestions()`, `validateAnswer()`
+  - ❌ `score()`, `questions()`, `check()`
+
+- **Components**: PascalCase, descriptive
+  - ✅ `QuestionCard`, `ScoreBoard`, `AnswerButton`
+  - ❌ `Card`, `Board`, `Btn`
+
+- **Constants**: UPPER_SNAKE_CASE
+  - ✅ `MAX_QUESTIONS`, `POINTS_PER_CORRECT_ANSWER`
+
+- **Booleans**: prefix with is/has/can/should
+  - ✅ `isLoading`, `hasAnswered`, `canProceed`
+  - ❌ `loading`, `answered`, `proceed`
+
+- **Event handlers**: prefix with handle/on
+  - ✅ `handleAnswerClick`, `onGameStart`
+
+- **Custom hooks**: prefix with use
+  - ✅ `useGameState`, `useTimer`, `useQuestions`
+
+## TypeScript Best Practices
+
+```typescript
+// ✅ Always define explicit types
+function calculateScore(correctAnswers: number, timeBonus: number): number {
+  return correctAnswers * 10 + timeBonus;
+}
+
+// ✅ Create interfaces for data structures
+interface Question {
+  id: string;
+  text: string;
+  answers: Answer[];
+  correctAnswerId: string;
+  category: QuestionCategory;
+}
+
+// ✅ Use type guards
+function isValidAnswer(answer: unknown): answer is Answer {
+  return typeof answer === 'object' && answer !== null && 'id' in answer;
+}
+
+// ❌ Never use 'any'
+// ✅ Use 'unknown' if type is truly unknown
+```
+
+## Component Structure Order
+1. Imports (external → internal → styles)
+2. Types/Interfaces
+3. Constants
+4. Helper functions
+5. Component definition
+6. Export
+
+## React Best Practices
+- Use functional components with hooks exclusively
+- Memoize expensive computations with `useMemo`
+- Memoize callbacks passed to children with `useCallback`
+- Extract reusable logic into custom hooks
+- Keep components focused - single responsibility
+- Use proper key props (never use index for dynamic lists)
+
+## Code Comments
+- Write self-documenting code
+- Comments explain "why", not "what"
+- Use JSDoc for public functions and components

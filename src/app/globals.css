@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors - Bright & Playful */
+  --color-primary: #FF6B6B;
+  --color-secondary: #4ECDC4;
+  --color-accent: #FFE66D;
+  
+  /* Supporting Colors */
+  --color-purple: #A855F7;
+  --color-pink: #F472B6;
+  --color-blue: #3B82F6;
+  --color-green: #22C55E;
+  --color-orange: #FB923C;
+  
+  /* Feedback Colors */
+  --color-correct: #22C55E;
+  --color-incorrect: #EF4444;
+  --color-highlight: #FBBF24;
+  
+  /* Backgrounds */
+  --bg-primary: #FFF5F5;
+  --bg-secondary: #F0FDFA;
+  
+  /* Text Colors */
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --text-on-dark: #FFFFFF;
+
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --font-sans: var(--font-rubik);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-rubik), 'Rubik', 'Heebo', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Colorful animated background for children */
+.bg-playful {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 230, 109, 0.1) 0%, transparent 70%),
+    linear-gradient(180deg, #FFF5F5 0%, #F0FDFA 100%);
+}
+
+/* Fun button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #ff8787 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  box-shadow: 0 4px 14px rgba(255, 107, 107, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, #6dd5cb 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  box-shadow: 0 4px 14px rgba(78, 205, 196, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.5);
+}
+
+.btn-secondary:active {
+  transform: scale(0.95);
+}
+
+/* Card styles */
+.card-playful {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.08);
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.card-playful:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 12px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Decorative elements */
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 230, 109, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 230, 109, 0.8);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }

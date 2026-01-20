@@ -1,0 +1,51 @@
+---
+description: Git commit message format
+globs: 
+alwaysApply: false
+---
+
+# Git Commit Message Format
+
+## Structure
+```
+type(scope): description
+
+[optional body]
+[optional footer]
+```
+
+## Types
+- `feat`: New feature
+- `fix`: Bug fix
+- `refactor`: Code change that neither fixes nor adds
+- `style`: Formatting, styling changes
+- `docs`: Documentation only
+- `test`: Adding or updating tests
+- `chore`: Maintenance tasks
+
+## Scopes
+- `game`: Game logic and flow
+- `ui`: UI components
+- `questions`: Question data/management
+- `scores`: Scoring system
+- `auth`: Authentication (if added)
+- `i18n`: Internationalization
+
+## Examples
+```
+feat(game): add countdown timer to questions
+
+fix(ui): correct RTL alignment on answer buttons
+
+refactor(questions): extract question fetching to custom hook
+
+style(ui): update button colors to match design system
+
+docs: add setup instructions to README
+```
+
+## Guidelines
+- Use imperative mood ("add" not "added")
+- Keep subject line under 72 characters
+- No period at end of subject line
+- Reference issues in footer: `Closes #123`

@@ -1,0 +1,35 @@
+---
+description: Project overview and general guidelines for the Hebrew Trivia Game
+globs: **/*
+alwaysApply: true
+---
+
+# Hebrew Trivia Game - Project Overview
+
+## About This Project
+- **Type**: Hebrew (RTL) Trivia Game for Children
+- **Stack**: Next.js 14+, TypeScript, Mantine UI, Tailwind CSS, Framer Motion
+- **Target Audience**: Children - design must be colorful, playful, and engaging
+- **Language**: Hebrew (Right-to-Left layout)
+
+## Core Principles
+1. **Child-First Design**: Every UI decision prioritizes children's usability
+2. **Accessibility**: High contrast, large touch targets, keyboard support
+3. **Performance**: Fast loading, smooth animations at 60fps
+4. **RTL Native**: Hebrew-first with proper bidirectional text support
+
+## File Organization
+```
+src/
+├── app/                    # Next.js App Router pages
+├── components/
+│   ├── ui/                 # Reusable UI components
+│   ├── game/               # Game-specific components
+│   └── layout/             # Layout components
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utility functions and helpers
+├── types/                  # TypeScript type definitions
+├── constants/              # App-wide constants
+├── styles/                 # Global styles and theme
+└── data/                   # Static data (questions, etc.)
+```

@@ -1,0 +1,72 @@
+---
+description: Hebrew language and RTL layout guidelines
+globs: **/*.{tsx,css}
+alwaysApply: true
+---
+
+# Hebrew (RTL) Guidelines
+
+## Document Setup
+Always set RTL at the document root:
+```tsx
+<html lang="he" dir="rtl">
+```
+
+## Font Selection
+```css
+font-family: 'Rubik', 'Heebo', 'Assistant', system-ui, sans-serif;
+```
+
+**Rubik** is the primary font - modern, clean, excellent Hebrew support.
+
+## CSS Best Practices for RTL
+
+### Use Logical Properties
+```css
+/* ✅ Logical properties (auto-flip for RTL) */
+margin-inline-start: 1rem;
+padding-inline-end: 2rem;
+border-inline-start: 2px solid;
+text-align: start;
+
+/* ❌ Physical properties (won't flip) */
+margin-left: 1rem;
+padding-right: 2rem;
+border-left: 2px solid;
+text-align: left;
+```
+
+### Tailwind RTL Classes
+```tsx
+// Use RTL-aware utilities
+className="ms-4"      // margin-inline-start
+className="me-4"      // margin-inline-end
+className="ps-4"      // padding-inline-start
+className="pe-4"      // padding-inline-end
+className="start-0"   // inset-inline-start
+className="end-0"     // inset-inline-end
+```
+
+## Icons & Direction
+Icons that imply direction should flip:
+```tsx
+// Arrows, chevrons, progress indicators
+className="rtl:rotate-180"
+```
+
+## Mixed Content
+Handle Hebrew + English/Numbers properly:
+```tsx
+// Numbers stay LTR
+<span dir="ltr">123</span>
+
+// English phrases in Hebrew context
+<span dir="ltr">Next.js</span>
+```
+
+## Testing RTL
+- Test all layouts in RTL mode
+- Verify text alignment
+- Check icon directions
+- Test with real Hebrew content
+- Validate number display
