@@ -325,52 +325,6 @@ function GameContent() {
     }
   }, [activeHumanPlayer, gamePhase, playerAnswers, activeHumanIndex, humanPlayers.length]);
 
-  // Handle bonus question answer (only current player answers)
-  const handleBonusQuestionAnswer = useCallback((answer: AnswerOption) => {
-    if (!currentTurnPlayer || !currentQuestion || gamePhase !== 'twistBonusQ') return;
-    
-    const isCorrect = answer.isCorrect;
-    
-    // Show feedback
-    if (isCorrect) {
-      playSound('correct');
-      // Player advances bonusQuestionSteps
-      const newPosition = (currentTurnPlayer.boardPosition + bonusQuestionSteps) % TOTAL_STEPS;
-      
-      // Check if player passes any gates
-      const gatesPassed = getGatesPassed(currentTurnPlayer.boardPosition, bonusQuestionSteps);
-      
-      setPlayers(prev => prev.map(p =>
-        p.id === currentTurnPlayer.id ? { ...p, boardPosition: newPosition } : p
-      ));
-      
-      // If gates passed and stars available, show star selection
-      if (gatesPassed.length > 0 && availableStars.length > 0) {
-        setGatesPassedQueue(gatesPassed);
-        setSelectingStarPlayer(currentTurnPlayer);
-        setTimeout(() => {
-          completeCurrentQuestion();
-          setActiveTwist(null);
-          setGamePhase('selectStar');
-        }, 1500);
-      } else {
-        setTimeout(() => {
-          completeCurrentQuestion();
-          setActiveTwist(null);
-          handleNextTurn();
-        }, 1500);
-      }
-    } else {
-      playSound('wrong');
-      // Wrong answer - no movement, go to next turn
-      setTimeout(() => {
-        completeCurrentQuestion();
-        setActiveTwist(null);
-        handleNextTurn();
-      }, 1500);
-    }
-  }, [currentTurnPlayer, currentQuestion, gamePhase, bonusQuestionSteps, availableStars, playSound, completeCurrentQuestion, setActiveTwist, handleNextTurn]);
-
   // Effect to simulate digital player answers one by one with independent random choices
   useEffect(() => {
     if (gamePhase !== 'question') return;
@@ -644,6 +598,52 @@ function GameContent() {
     setCurrentTurnIndex(nextIndex);
     setGamePhase('spinning');
   }, [players.length, players, completeCurrentQuestion, extraTurnPending, playOrderReversed, reverseTurnsRemaining, currentTurnIndex, tickModifiers, modifiers, removeModifier, setActiveTwist]);
+
+  // Handle bonus question answer (only current player answers)
+  const handleBonusQuestionAnswer = useCallback((answer: AnswerOption) => {
+    if (!currentTurnPlayer || !currentQuestion || gamePhase !== 'twistBonusQ') return;
+    
+    const isCorrect = answer.isCorrect;
+    
+    // Show feedback
+    if (isCorrect) {
+      playSound('correct');
+      // Player advances bonusQuestionSteps
+      const newPosition = (currentTurnPlayer.boardPosition + bonusQuestionSteps) % TOTAL_STEPS;
+      
+      // Check if player passes any gates
+      const gatesPassed = getGatesPassed(currentTurnPlayer.boardPosition, bonusQuestionSteps);
+      
+      setPlayers(prev => prev.map(p =>
+        p.id === currentTurnPlayer.id ? { ...p, boardPosition: newPosition } : p
+      ));
+      
+      // If gates passed and stars available, show star selection
+      if (gatesPassed.length > 0 && availableStars.length > 0) {
+        setGatesPassedQueue(gatesPassed);
+        setSelectingStarPlayer(currentTurnPlayer);
+        setTimeout(() => {
+          completeCurrentQuestion();
+          setActiveTwist(null);
+          setGamePhase('selectStar');
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          completeCurrentQuestion();
+          setActiveTwist(null);
+          handleNextTurn();
+        }, 1500);
+      }
+    } else {
+      playSound('wrong');
+      // Wrong answer - no movement, go to next turn
+      setTimeout(() => {
+        completeCurrentQuestion();
+        setActiveTwist(null);
+        handleNextTurn();
+      }, 1500);
+    }
+  }, [currentTurnPlayer, currentQuestion, gamePhase, bonusQuestionSteps, availableStars, playSound, completeCurrentQuestion, setActiveTwist, handleNextTurn]);
 
   // Handle twist card confirmation (execute the effect)
   const handleTwistConfirm = useCallback(() => {
