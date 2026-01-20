@@ -1505,7 +1505,7 @@ function GameContent() {
                   playerAnswers={[]}
                   allPlayersAnswered={false}
                   isRevealed={false}
-                  onAnswerClick={currentTurnPlayer.type === 'human' ? handleBonusQuestionAnswer : undefined}
+                  onAnswerClick={currentTurnPlayer.type === 'human' ? handleBonusQuestionAnswer : () => {}}
                   activePlayerId={currentTurnPlayer.type === 'human' ? currentTurnPlayer.id : null}
                 />
               </div>
